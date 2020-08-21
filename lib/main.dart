@@ -2,6 +2,7 @@ import 'package:canvasparent/screens/detailpage.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home.dart';
+import 'screens/notificationspage.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (ctx) => Home(),
         DetailPage.route: (ctx) => DetailPage(),
+        NotificationsPage.route: (ctx) => NotificationsPage(),
       },
     );
   }
