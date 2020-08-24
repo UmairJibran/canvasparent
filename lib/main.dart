@@ -1,3 +1,4 @@
+import 'package:canvasparent/screens/darkpage.dart';
 import 'package:canvasparent/screens/detailpage.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
         "/": (ctx) => Home(),
         DetailPage.route: (ctx) => DetailPage(),
         NotificationsPage.route: (ctx) => NotificationsPage(),
+        DarkPage.route: (ctx) => DarkPage(),
       },
     );
   }

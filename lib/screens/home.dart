@@ -1,6 +1,7 @@
 import 'package:canvasparent/screens/detailpage.dart';
 import 'package:flutter/material.dart';
 
+import 'darkpage.dart';
 import 'notificationspage.dart';
 
 class Home extends StatelessWidget {
@@ -23,6 +24,11 @@ class Home extends StatelessWidget {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => NotificationsPage())),
               child: Text("Screen 4"),
+            ),
+            RaisedButton(
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => DarkPage())),
+              child: Text("Screen 5"),
             ),
           ],
         ),
