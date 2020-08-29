@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AssignmentTile extends StatelessWidget {
   final String assignmentName;
-  final String dueDate;
+  final DateTime dueDate;
   final bool isLate;
   final Color color;
   final bool submitted;
@@ -25,7 +26,7 @@ class AssignmentTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              dueDate,
+              DateFormat.yMMMd().format(dueDate),
               style: TextStyle(
                 color: Colors.grey,
               ),

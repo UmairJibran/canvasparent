@@ -1,11 +1,45 @@
-import 'package:canvasparent/dummy/assignments.dart';
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../assignment_tile.dart';
 
-class Grades extends StatelessWidget {
+class Grades extends StatefulWidget {
+  @override
+  _GradesState createState() => _GradesState();
+}
+
+class _GradesState extends State<Grades> {
+  bool loading = true;
+  List<Map<String, dynamic>> assignments = [];
+  void loadAssignments() {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    var snapshot = firebaseFirestore.collection("assignments").get();
+    snapshot.then((value) {
+      var docs = value.docs;
+      docs.forEach((doc) {
+        var assignment = doc.data();
+        final dueDate =
+            DateTime.parse(assignment['dueTime'].toDate().toString());
+        assignments.add({
+          "assignmentTitle": assignment["assignmentTitle"],
+          "due": dueDate,
+          "late": assignment["late"],
+          "submitted": assignment["submitted"],
+        });
+        print(assignments.length.toString());
+      });
+    });
+    setState(() {
+      loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    loading = true;
+    loadAssignments();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       height: MediaQuery.of(context).size.height,
@@ -78,13 +112,17 @@ class Grades extends StatelessWidget {
             child: ListView.builder(
               itemCount: assignments.length,
               itemBuilder: (_, index) {
-                return AssignmentTile(
-                  assignments[index]["assignmentTitle"],
-                  dueDate: assignments[index]["due"],
-                  color: assignments[index]["color"],
-                  isLate: assignments[index]["late"],
-                  submitted: assignments[index]["submitted"],
-                );
+                return loading
+                    ? CircularProgressIndicator()
+                    : AssignmentTile(
+                        assignments[index]["assignmentTitle"],
+                        dueDate: assignments[index]["due"],
+                        isLate: assignments[index]["late"],
+                        submitted: assignments[index]["submitted"],
+                        color: Random().nextInt(9) % 2 == 1
+                            ? Colors.green
+                            : Colors.blue,
+                      );
               },
             ),
           ),
@@ -105,13 +143,17 @@ class Grades extends StatelessWidget {
             child: ListView.builder(
               itemCount: assignments.length,
               itemBuilder: (_, index) {
-                return AssignmentTile(
-                  assignments[index]["assignmentTitle"],
-                  dueDate: assignments[index]["due"],
-                  isLate: assignments[index]["late"],
-                  submitted: assignments[index]["submitted"],
-                  color: assignments[index]["color"],
-                );
+                return loading
+                    ? CircularProgressIndicator()
+                    : AssignmentTile(
+                        assignments[index]["assignmentTitle"],
+                        dueDate: assignments[index]["due"],
+                        isLate: assignments[index]["late"],
+                        submitted: assignments[index]["submitted"],
+                        color: Random().nextInt(9) % 2 == 1
+                            ? Colors.green
+                            : Colors.blue,
+                      );
               },
             ),
           ),

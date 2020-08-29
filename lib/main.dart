@@ -1,11 +1,16 @@
 import 'package:canvasparent/screens/darkpage.dart';
 import 'package:canvasparent/screens/detailpage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home.dart';
 import 'screens/notificationspage.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
