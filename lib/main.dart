@@ -1,5 +1,6 @@
 import 'package:canvasparent/screens/darkpage.dart';
 import 'package:canvasparent/screens/detailpage.dart';
+import 'package:canvasparent/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        "/": (ctx) => Home(),
+        "/": (ctx) => LoginPage(),
         DetailPage.route: (ctx) => DetailPage(),
         NotificationsPage.route: (ctx) => NotificationsPage(),
         DarkPage.route: (ctx) => DarkPage(),
